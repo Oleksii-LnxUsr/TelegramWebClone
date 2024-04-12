@@ -1,0 +1,42 @@
+.contact-container {
+    background: #e7e7e7;
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    margin: 0 auto;
+    border-radius: 10px;
+    height: 65px;
+    box-shadow: 3px 5px 2px 0px #d9d9d9;
+    cursor: pointer;
+    position: relative;
+}
+
+.contact-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.contact-name {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.contact-badge {
+    background: #ffbd8d;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 15px;
+    width: auto;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+}

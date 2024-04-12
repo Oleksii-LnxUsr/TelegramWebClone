@@ -1,0 +1,16 @@
+.chatlist-sidebar {
+    display: flex;
+    flex-direction: row;
+    user-select: none;
+}
+
+.sidebar-container {
+    background: #f7f7f7;
+}
+
+.resizer {
+    height: 100vh;
+    width: 3px;
+    cursor: ew-resize;
+    background: #e7e7e7;
+}
