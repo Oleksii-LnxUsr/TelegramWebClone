@@ -1,0 +1,24 @@
+.user-search-container {
+    position: absolute;
+    background: #c8c6c6;
+    width: 100%;
+    padding-bottom: 5px;
+    border-radius: 15px;
+    z-index: 10000;
+}
+
+.user-search-item {
+    display: flex;
+    flex-direction: row;
+    background: #e4e4e4;
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px;
+    border-radius: 15px;
+    margin-top: 5px;
+}
+
+.user-search-item p {
+    margin-top: 5px;
+    margin-left: 10px;
+}

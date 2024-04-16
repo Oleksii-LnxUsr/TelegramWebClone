@@ -5,7 +5,8 @@ import uuid
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
-    username=models.CharField(max_length=50)
+    user_uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    username = models.CharField(max_length=50, unique=True)
     email = models.EmailField(unique=True)
     avatar = models.ImageField(default="users/avatar/default-avatar.png", upload_to="users/avatar/")
     referral_code = models.UUIDField(default=uuid.uuid4, unique=True)

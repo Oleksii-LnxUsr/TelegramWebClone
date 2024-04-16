@@ -5,9 +5,14 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import ChatIcon from "@mui/icons-material/Chat";
 import ContactsIcon from "@mui/icons-material/Contacts";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { useEffect } from "react";
 
 const BottomNavbar = () => {
     const [value, setValue] = React.useState(0);
+
+    useEffect(() => {
+        console.log(value);
+    }, [value]);
 
     return (
         <Box>

@@ -1,0 +1,113 @@
+2024-04-08 13:38:25,221 INFO autoreload Watching for file changes with StatReloader
+2024-04-08 13:39:24,167 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:14:11,147 INFO autoreload Watching for file changes with StatReloader
+2024-04-08 14:31:05,569 WARNING log Not Found: /chat/lobby/
+2024-04-08 14:34:23,080 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:35:07,174 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:35:08,210 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:35:34,884 INFO autoreload Watching for file changes with StatReloader
+2024-04-08 14:35:37,351 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:35:45,609 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:35:49,608 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:36:04,608 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:36:05,317 WARNING log Not Found: /chat/room_name
+2024-04-08 14:36:06,577 WARNING log Not Found: /chat/room_name
+2024-04-08 14:36:07,338 WARNING log Not Found: /chat/room_name
+2024-04-08 14:36:33,695 WARNING log Not Found: /:ws/chat/room_name
+2024-04-08 14:36:35,783 WARNING log Not Found: /:ws/chat/room_name
+2024-04-08 14:36:43,972 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:36:45,411 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:42:37,799 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:42:44,175 WARNING log Not Found: /ws/chat/room_name
+2024-04-08 14:45:52,604 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 14:45:56,399 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 14:46:28,616 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:51:54,577 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:52:10,218 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:52:10,787 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:52:36,583 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:52:37,267 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:55:47,552 INFO autoreload Watching for file changes with StatReloader
+2024-04-08 15:55:52,841 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:55:53,577 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:55:54,307 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:56:17,008 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:56:17,559 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:56:18,105 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:57:54,282 INFO autoreload /Users/admin/Documents/Projects/WebMessenger/backend/config/settings.py changed, reloading.
+2024-04-08 15:57:54,484 INFO autoreload Watching for file changes with StatReloader
+2024-04-08 15:58:02,981 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:58:03,518 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:59:50,230 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 15:59:50,825 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 16:01:51,466 INFO autoreload Watching for file changes with StatReloader
+2024-04-08 16:02:07,728 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 16:02:09,163 WARNING log Not Found: /ws/chat/room_name/
+2024-04-08 16:30:57,994 INFO cli Starting server at tcp:port=8000:interface=0.0.0.0
+2024-04-08 16:30:57,994 INFO server HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+2024-04-08 16:30:57,995 INFO server Configuring endpoint tcp:port=8000:interface=0.0.0.0
+2024-04-08 16:30:57,995 INFO server Listening on TCP address 0.0.0.0:8000
+2024-04-08 16:31:15,008 ERROR server Exception inside application: Django can only handle ASGI/HTTP connections, not websocket.
+Traceback (most recent call last):
+  File "/Users/admin/Documents/Projects/WebMessenger/.venv/lib/python3.9/site-packages/django/core/handlers/asgi.py", line 155, in __call__
+    raise ValueError(
+ValueError: Django can only handle ASGI/HTTP connections, not websocket.
+2024-04-08 16:31:16,018 ERROR server Exception inside application: Django can only handle ASGI/HTTP connections, not websocket.
+Traceback (most recent call last):
+  File "/Users/admin/Documents/Projects/WebMessenger/.venv/lib/python3.9/site-packages/django/core/handlers/asgi.py", line 155, in __call__
+    raise ValueError(
+ValueError: Django can only handle ASGI/HTTP connections, not websocket.
+2024-04-08 16:31:19,382 WARNING log Not Found: /static/admin/css/base.css
+2024-04-08 16:31:19,383 WARNING log Not Found: /static/admin/css/nav_sidebar.css
+2024-04-08 16:31:19,385 WARNING log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2024-04-08 16:31:19,386 WARNING log Not Found: /static/admin/css/dark_mode.css
+2024-04-08 16:31:19,387 WARNING log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2024-04-08 16:31:19,397 WARNING log Not Found: /static/admin/css/forms.css
+2024-04-08 16:31:19,411 WARNING log Not Found: /static/admin/css/responsive.css
+2024-04-08 16:31:19,412 WARNING log Not Found: /static/admin/js/admin/DateTimeShortcuts.js
+2024-04-08 16:31:19,412 WARNING log Not Found: /static/admin/js/calendar.js
+2024-04-08 16:31:19,413 WARNING log Not Found: /static/admin/js/jquery.init.js
+2024-04-08 16:31:19,413 WARNING log Not Found: /static/admin/js/core.js
+2024-04-08 16:31:19,421 WARNING log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-04-08 16:31:19,432 WARNING log Not Found: /static/admin/js/prepopulate.js
+2024-04-08 16:31:19,432 WARNING log Not Found: /static/admin/js/actions.js
+2024-04-08 16:31:19,433 WARNING log Not Found: /static/admin/js/urlify.js
+2024-04-08 16:31:19,458 WARNING log Not Found: /static/admin/img/icon-viewlink.svg
+2024-04-08 16:31:19,458 WARNING log Not Found: /static/admin/img/icon-addlink.svg
+2024-04-08 16:31:19,461 WARNING log Not Found: /static/admin/js/prepopulate_init.js
+2024-04-08 16:31:19,461 WARNING log Not Found: /static/admin/css/responsive.css
+2024-04-08 16:31:19,461 WARNING log Not Found: /static/admin/img/icon-deletelink.svg
+2024-04-08 16:31:19,461 WARNING log Not Found: /static/admin/img/icon-changelink.svg
+2024-04-08 16:31:19,477 WARNING log Not Found: /static/admin/js/theme.js
+2024-04-08 16:31:19,477 WARNING log Not Found: /static/admin/js/change_form.js
+2024-04-08 16:31:19,478 WARNING log Not Found: /static/admin/js/nav_sidebar.js
+2024-04-08 16:31:20,315 WARNING log Not Found: /static/admin/css/nav_sidebar.css
+2024-04-08 16:31:20,316 WARNING log Not Found: /static/admin/css/forms.css
+2024-04-08 16:31:20,315 WARNING log Not Found: /static/admin/css/base.css
+2024-04-08 16:31:20,317 WARNING log Not Found: /static/admin/js/vendor/jquery/jquery.js
+2024-04-08 16:31:20,321 WARNING log Not Found: /static/admin/css/dark_mode.css
+2024-04-08 16:31:20,341 WARNING log Not Found: /static/admin/js/calendar.js
+2024-04-08 16:31:20,346 WARNING log Not Found: /static/admin/js/jquery.init.js
+2024-04-08 16:31:20,350 WARNING log Not Found: /static/admin/css/responsive.css
+2024-04-08 16:31:20,351 WARNING log Not Found: /static/admin/js/admin/RelatedObjectLookups.js
+2024-04-08 16:31:20,352 WARNING log Not Found: /static/admin/js/core.js
+2024-04-08 16:31:20,352 WARNING log Not Found: /static/admin/js/admin/DateTimeShortcuts.js
+2024-04-08 16:31:20,363 WARNING log Not Found: /static/admin/js/actions.js
+2024-04-08 16:31:20,370 WARNING log Not Found: /static/admin/js/urlify.js
+2024-04-08 16:31:20,370 WARNING log Not Found: /static/admin/js/prepopulate.js
+2024-04-08 16:31:20,370 WARNING log Not Found: /static/admin/js/vendor/xregexp/xregexp.js
+2024-04-08 16:31:20,394 WARNING log Not Found: /static/admin/js/prepopulate_init.js
+2024-04-08 16:31:20,396 WARNING log Not Found: /static/admin/img/icon-deletelink.svg
+2024-04-08 16:31:20,397 WARNING log Not Found: /static/admin/img/icon-addlink.svg
+2024-04-08 16:31:20,398 WARNING log Not Found: /static/admin/img/icon-changelink.svg
+2024-04-08 16:31:20,399 WARNING log Not Found: /static/admin/css/responsive.css
+2024-04-08 16:31:20,400 WARNING log Not Found: /static/admin/img/icon-viewlink.svg
+2024-04-08 16:31:20,414 WARNING log Not Found: /static/admin/js/change_form.js
+2024-04-08 16:31:20,414 WARNING log Not Found: /static/admin/js/theme.js
+2024-04-08 16:31:20,417 WARNING log Not Found: /static/admin/js/nav_sidebar.js
+2024-04-08 16:31:23,941 WARNING log Not Found: /
+2024-04-08 16:31:25,466 WARNING log Not Found: /
+2024-04-08 16:31:25,852 WARNING log Not Found: /
+2024-04-08 16:54:40,966 INFO server Killed 0 pending application instances
+2024-04-08 16:55:55,913 INFO autoreload Watching for file changes with StatReloader
+2024-04-08 17:41:46,216 INFO autoreload Watching for file changes with StatReloader
