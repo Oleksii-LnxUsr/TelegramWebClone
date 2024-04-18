@@ -14,13 +14,19 @@
     "prettier.tabWidth": 4,
     "python.languageServer": "Pylance",
     "editor.formatOnPaste": true,
-    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.acceptSuggestionOnCommitCharacter": true,
     "workbench.colorTheme": "Theme Flat",
     "python.analysis.autoFormatStrings": true,
     "files.autoSave": "afterDelay",
     "editor.fontSize": 13,
     "editor.renderWhitespace": "trailing",
     "editor.wordWrap": "wordWrapColumn",
-    "editor.bracketPairColorization.independentColorPoolPerBracketType": false,
-    "html.format.wrapLineLength": 80
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "html.format.wrapLineLength": 80,
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python",
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    }
 }

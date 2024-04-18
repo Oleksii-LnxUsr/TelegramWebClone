@@ -1,13 +1,25 @@
-clients = {}
-chats = []
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 import uuid
 import json
 from django.utils import timezone
-from .services import save_message
+from asgiref.sync import sync_to_async
+from .models import Message
+from users.models import CustomUser
 
 
 class ChatWebSocket(AsyncJsonWebsocketConsumer):
+    @sync_to_async
+    def save_message(self, user, message):
+        return Message.objects.create(sender=user, text=message)
+
+    @sync_to_async
+    def get_user_by_id(self, user_id):
+        try:
+            user = CustomUser.objects.get(id=user_id)
+            return user
+        except CustomUser.DoesNotExist:
+            return None
+
     async def connect(self):
         self.chat_id = self.scope['url_route']['kwargs']['chat_id']
         self.chat_group_name = f'chat_{self.chat_id}'
@@ -30,7 +42,7 @@ class ChatWebSocket(AsyncJsonWebsocketConsumer):
             {
                 'type': 'chat.message',
                 'chat_id': self.chat_id,
-                'username': self.scope['user'].username,
+                'user_id': self.scope['user'].id,
                 'message': text_data,
                 'time_stamp': str(timezone.now())
             }
@@ -40,15 +52,17 @@ class ChatWebSocket(AsyncJsonWebsocketConsumer):
         """
         Called when someone has messaged our chat.
         """
-        print('Someone send message')
         # Send a message down to the client
-        await self.send_json(
-            {
-                'msg_type': 'chat.send',
-                'chat': event['chat_id'],
-                'username': event['username'],
-                'message': event['message'],
-                'time_stamp': event['time_stamp']
-            },
-        )
-        save_message(message=event['message'], user=event['username'])
+        user = await self.get_user_by_id(user_id=event['user_id'])
+        new_message = await self.save_message(user=user, message=event['message'])
+
+        if user:
+            await self.send_json(
+                {
+                    'msg_type': 'chat.send',
+                    'chat': event['chat_id'],
+                    'username': user.username,
+                    'message': event['message'],
+                    'time_stamp': event['time_stamp']
+                },
+            )
