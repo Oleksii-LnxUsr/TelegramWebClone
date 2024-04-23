@@ -1,8 +1,9 @@
 import { FormControl } from "@mui/material";
-import { useEffect, useState, useContext, useRef } from "react";
+import { useEffect, useState, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import CustomField from "../CustomField/CustomField";
 import { getChatInfo } from "../../api/getChatInfo";
+import { getChatMessages } from "../../api/getMessages";
 import Message from "../Message/Message";
 import "./Chat.css";
 
@@ -16,12 +17,20 @@ const Chat = ({ chat_id }) => {
 
     const apiUrl = process.env.REACT_APP_API_URL;
 
+    console.log(recivedMessages);
+
     useEffect(() => {
         if (chat_id) {
             getChatInfo({
                 authTokens: authTokens,
                 uuid: chat_id,
                 setData: setChatInfo,
+            });
+
+            getChatMessages({
+                setData: setRecivedMessages,
+                uuid: chat_id,
+                authTokens: authTokens,
             });
 
             const ws = new WebSocket(

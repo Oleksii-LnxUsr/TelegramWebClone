@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from users.models import CustomUser
 from .models import Message, Chat
-from .serializers import ChatSerializer, MessageSerializer
+from .serializers import ChatSerializer, ChatMessagesSerializer
 
 
 class ChatListAPIView(ListAPIView):
@@ -21,7 +21,6 @@ class ChatDetailAPIView(APIView):
         permission_classes = [IsAuthenticated]
         chat = get_object_or_404(Chat, uuid=chat_uuid)
         serializer = ChatSerializer(chat)
-
         return Response(serializer.data)
 
 class CreateChatAPIView(APIView):
@@ -40,3 +39,13 @@ class CreateChatAPIView(APIView):
                 return Response({"message": "Chat created successfully", "chat_id": new_chat.uuid}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class MessagesListAPIView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = ChatMessagesSerializer
+
+    def get_queryset(self):
+        chat_uuid = self.kwargs['chat_uuid']
+        chat = Chat.objects.get(uuid=chat_uuid)
+        messages = chat.messages.all()
+        return messages

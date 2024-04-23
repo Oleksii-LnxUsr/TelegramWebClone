@@ -9,6 +9,15 @@ class MessageSerializer(serializers.ModelSerializer):
         model = Message
         fields = ['sender', 'text', 'timestamp']
 
+class ChatMessagesSerializer(serializers.ModelSerializer):
+    user_id = serializers.ReadOnlyField(source='sender.id')
+    message = serializers.CharField(source='text', required=True)
+    time_stamp = serializers.DateTimeField(source='timestamp', required=True)
+
+    class Meta:
+        model = Message
+        fields = ['user_id', 'message', 'time_stamp']
+
 class ChatSerializer(serializers.ModelSerializer):
     class Meta:
         model = Chat

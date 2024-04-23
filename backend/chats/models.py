@@ -10,8 +10,7 @@ class Message(models.Model):
     timestamp = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        formatted_timestamp = self.timestamp.astimezone(timezone.utc).strftime('%y-%m-%d %H:%M:%S')
-        return f'{self.sender.username} | {formatted_timestamp}'
+        return f'{self.sender.username} | {self.pk}'
 
 class Chat(models.Model):
     uuid = models.UUIDField(primary_key = True, default=uuid.uuid4)

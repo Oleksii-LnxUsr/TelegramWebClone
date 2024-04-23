@@ -1,11 +1,11 @@
-from channels.generic.websocket import AsyncJsonWebsocketConsumer
-import uuid
 import json
+import uuid
 from django.utils import timezone
+from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from asgiref.sync import sync_to_async
 from channels.db import database_sync_to_async
-from .models import Chat, Message
 from users.models import CustomUser
+from .models import Chat, Message
 
 
 class ChatWebSocket(AsyncJsonWebsocketConsumer):
