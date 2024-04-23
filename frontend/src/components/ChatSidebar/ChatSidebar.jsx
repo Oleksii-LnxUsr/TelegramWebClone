@@ -1,65 +1,37 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect, useContext } from "react";
+import debounce from "lodash/debounce";
 import BottomNavbar from "../BottomNavigation/BottomNavigation";
 import CustomField from "../CustomField/CustomField";
 import Contact from "../Contact/Contact";
-import debounce from "lodash/debounce";
-import "./ChatSidebar.css";
 import ResultUsers from "../ResultUsers/ResultUsers";
+import { rsMouseDownHandler } from "../../utils/rsMouseDownHandler";
+import { getUserByUsername } from "../../api/getUsersByUsername";
+import { getUserChats } from "../../api/getUserChats";
+import AuthContext from "../../context/AuthContext";
+import "./ChatSidebar.css";
 
 const ChatSidebar = () => {
     const [sidebarWidth, setSidebarWidth] = useState(250);
     const [searchUsers, setSearchUsers] = useState("");
     const [resultUsers, setResultUsers] = useState([]);
+    const [chats, setChats] = useState([]);
+    const { authTokens } = useContext(AuthContext);
     const sidebarRef = useRef(null);
 
-    const rsMouseDownHandler = (e) => {
-        const x = e.clientX;
-        const sbWidth = window.getComputedStyle(sidebarRef.current).width;
-        const initialWidth = parseInt(sbWidth, 10);
+    useEffect(() => {
+        getUserChats({ authTokens: authTokens, setData: setChats });
+    }, [authTokens]);
 
-        const mouseMoveHandler = (e) => {
-            const dx = e.clientX - x;
-            const newWidth = initialWidth + dx;
-
-            if (newWidth >= 250) {
-                setSidebarWidth(newWidth);
-            }
-        };
-
-        const mouseUpHandler = () => {
-            document.removeEventListener("mouseup", mouseUpHandler);
-            document.removeEventListener("mousemove", mouseMoveHandler);
-        };
-
-        document.addEventListener("mousemove", mouseMoveHandler);
-        document.addEventListener("mouseup", mouseUpHandler);
-    };
-
-    const search = async (term) => {
-        if (term) {
-            try {
-                const response = await fetch(
-                    `http://127.0.0.1:8000/users/?search=${encodeURIComponent(term)}`,
-                );
-                if (response.ok) {
-                    const data = await response.json();
-                    setResultUsers(data);
-                    console.log(data);
-                }
-            } catch (error) {
-                console.error("Error when requesting data");
-            }
-        } else {
-            setResultUsers([]);
-        }
+    const search = (term) => {
+        getUserByUsername({ term: term, setData: setResultUsers });
     };
 
     const debouncedSearch = useRef(debounce(search, 500)).current;
 
     const handleChange = (event) => {
-        const { value } = event.target;
-        setSearchUsers(value);
-        debouncedSearch(value);
+        const searchTerm = event.target.value;
+        setSearchUsers(searchTerm);
+        debouncedSearch(searchTerm);
     };
 
     return (
@@ -89,31 +61,40 @@ const ChatSidebar = () => {
                     />
                 </div>
 
-                {resultUsers.length > 0 && <ResultUsers result={resultUsers} />}
+                {resultUsers.length > 0 && (
+                    <ResultUsers
+                        result={resultUsers}
+                        setResult={setResultUsers}
+                    />
+                )}
 
-                <div style={{ marginTop: "15px" }}>
-                    <Contact name="Username" unreadMessages={4} uuid={14} />
-                </div>
-                <div style={{ marginTop: "15px" }}>
-                    <Contact name="Username" unreadMessages={4} uuid={1} />
-                </div>
-                <div style={{ marginTop: "15px" }}>
-                    <Contact name="Username" unreadMessages={4} uuid={10} />
-                </div>
-                <div style={{ marginTop: "15px" }}>
-                    <Contact name="Username" unreadMessages={4} uuid={44} />
-                </div>
                 <div
                     style={{
-                        position: "absolute",
-                        bottom: 5,
-                        width: "100%",
+                        height: "90vh",
+                        overflowY: "auto",
+                        paddingBottom: "145px",
                     }}
                 >
-                    <BottomNavbar />
+                    {chats.map((chat) => {
+                        return (
+                            <div key={chat.uuid} style={{ marginTop: "15px" }}>
+                                <Contact
+                                    name={chat.name}
+                                    unreadMessages={4}
+                                    uuid={chat.uuid}
+                                    avatar={chat.avatar}
+                                />
+                            </div>
+                        );
+                    })}
                 </div>
             </div>
-            <div className="resizer" onMouseDown={rsMouseDownHandler}>
+            <div
+                className="resizer"
+                onMouseDown={(e) =>
+                    rsMouseDownHandler({ e, setSidebarWidth, sidebarRef })
+                }
+            >
                 {/* Resizer element */}
             </div>
         </div>

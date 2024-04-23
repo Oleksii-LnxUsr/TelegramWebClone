@@ -1,0 +1,25 @@
+.user-message {
+    background: #e4e4e4;
+    max-width: 70%;
+    margin-right: auto;
+    padding: 5px;
+    margin-left: 5px;
+    text-align: left;
+}
+
+.own-message {
+    background: #ffbd8d;
+    max-width: 70%;
+    margin-left: auto;
+    padding: 5px;
+    margin-right: 5px;
+    text-align: right;
+}
+
+.own-message .message-text {
+    padding-right: 10px;
+}
+
+.user-message .message-text {
+    padding-left: 10px;
+}

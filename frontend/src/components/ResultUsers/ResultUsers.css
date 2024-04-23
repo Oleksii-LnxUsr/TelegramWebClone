@@ -1,6 +1,5 @@
 .user-search-container {
     position: absolute;
-    background: #c8c6c6;
     width: 100%;
     padding-bottom: 5px;
     border-radius: 15px;
@@ -10,12 +9,14 @@
 .user-search-item {
     display: flex;
     flex-direction: row;
-    background: #e4e4e4;
+    background: #d9d9d9;
     width: 90%;
     margin: 0 auto;
     padding: 5px;
     border-radius: 15px;
+    border: 1px solid #000;
     margin-top: 5px;
+    cursor: pointer;
 }
 
 .user-search-item p {

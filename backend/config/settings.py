@@ -28,9 +28,8 @@ INSTALLED_APPS = [
     'chats.apps.ChatsConfig',
     'subscriptions.apps.SubscriptionsConfig',
     'rest_framework',
-    'djoser',
     'rest_framework_simplejwt',
-
+    'djoser',
 ]
 
 MIDDLEWARE = [

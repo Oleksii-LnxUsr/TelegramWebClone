@@ -1,0 +1,7 @@
+.user-modal-container {
+    background-color: #fff;
+    text-align: center;
+    width: 400px;
+    border-radius: 15px;
+    user-select: none;
+}

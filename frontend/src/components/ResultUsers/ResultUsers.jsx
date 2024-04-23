@@ -1,17 +1,36 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import UserCardModal from "../UserCardModal/UserCardModal";
 import "./ResultUsers.css";
 
-const ResultUsers = ({ result }) => {
+const ResultUsers = ({ result, setResult }) => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [selectedUser, setSelectedUser] = useState("");
+
+    const userCardModal = (user_id) => {
+        setSelectedUser(user_id);
+        setIsModalOpen(!isModalOpen);
+    };
+
+    const handleClose = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className="user-search-container">
-            {result?.map((user) => {
-                return (
-                    <Link
-                        to={`/user/${user?.user_uuid}`}
-                        key={user?.user_uuid}
-                        style={{ textDecoration: "none", color: "black" }}
-                    >
-                        <div className="user-search-item">
+            <UserCardModal
+                open={isModalOpen}
+                handleClose={handleClose}
+                userUuid={selectedUser}
+                setIsOpen={setIsModalOpen}
+            />
+            {!isModalOpen &&
+                result?.map((user) => {
+                    return (
+                        <div
+                            className="user-search-item"
+                            onClick={() => userCardModal(user.user_uuid)}
+                            key={user.user_uuid}
+                        >
                             <img
                                 src={user?.avatar}
                                 alt="user avatar"
@@ -19,9 +38,8 @@ const ResultUsers = ({ result }) => {
                             />
                             <p>{user?.username}</p>
                         </div>
-                    </Link>
-                );
-            })}
+                    );
+                })}
         </div>
     );
 };
