@@ -1,9 +1,20 @@
-import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import ChatSidebar from "../components/ChatSidebar/ChatSidebar";
 import Chat from "../components/Chat/Chat";
+import AuthContext from "../context/AuthContext";
+import { useEffect } from "react";
 
 const Home = () => {
     const { chat_id } = useParams();
+    const { user } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!user) {
+            navigate("/login");
+        }
+    }, [user, navigate]);
 
     return (
         <div

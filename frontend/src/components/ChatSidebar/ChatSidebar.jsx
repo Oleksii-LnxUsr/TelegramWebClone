@@ -15,12 +15,16 @@ const ChatSidebar = () => {
     const [searchUsers, setSearchUsers] = useState("");
     const [resultUsers, setResultUsers] = useState([]);
     const [chats, setChats] = useState([]);
-    const { authTokens } = useContext(AuthContext);
+    const { authTokens, logoutUser } = useContext(AuthContext);
     const sidebarRef = useRef(null);
 
     useEffect(() => {
-        getUserChats({ authTokens: authTokens, setData: setChats });
-    }, [authTokens]);
+        getUserChats({
+            authTokens: authTokens,
+            setData: setChats,
+            logout: logoutUser,
+        });
+    }, [authTokens, logoutUser]);
 
     const search = (term) => {
         getUserByUsername({ term: term, setData: setResultUsers });

@@ -1,6 +1,8 @@
 import json
 import uuid
 from django.utils import timezone
+from django.shortcuts import get_object_or_404
+from django.db import transaction
 from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from asgiref.sync import sync_to_async
 from channels.db import database_sync_to_async
@@ -17,26 +19,20 @@ class ChatWebSocket(AsyncJsonWebsocketConsumer):
 
     @database_sync_to_async
     def get_user_by_id(self, user_id):
-        try:
-            user = CustomUser.objects.get(id=user_id)
-            return user
-        except CustomUser.DoesNotExist:
-            return None
+        return get_object_or_404(CustomUser, id=user_id)
 
     @database_sync_to_async
-    def get_or_create_chat(self, chat_id, member):
+    def get_chat(self, chat_id):
         try:
-            chat = Chat.objects.get(uuid=chat_id)
-            chat.members.add(member)
-        except Chat.DoesNotExist:
-            chat = Chat.objects.create(uuid=chat_id, name=member.username, avatar=member.avatar)
-            chat.members.add(member)
-        return chat
+            chat = get_object_or_404(Chat, uuid=chat_id)
+            return chat
+        except:
+            return None
 
     async def connect(self):
         self.chat_id = self.scope['url_route']['kwargs']['chat_id']
         self.chat_group_name = f'chat_{self.chat_id}'
-        self.chat_object = await self.get_or_create_chat(self.chat_id, self.scope['user'])
+        self.chat_object = await self.get_chat(chat_id=self.chat_id)
 
         await self.channel_layer.group_add(
             self.chat_group_name,
@@ -54,23 +50,23 @@ class ChatWebSocket(AsyncJsonWebsocketConsumer):
             {
                 'type': 'chat.message',
                 'chat_id': self.chat_id,
-                'user_id': self.scope['user'].id,
+                'user_id': self.scope['user'].id, # Decoded JWT user data
                 'message': text_data,
-                'time_stamp': str(timezone.now())
+                'timestamp': str(timezone.now())
             }
         )
 
     async def chat_message(self, event):
         user = await self.get_user_by_id(user_id=event['user_id'])
         new_message = await self.save_message(user=user, message=event['message'], chat=self.chat_object)
+        print(event['message'], 'RECIVED MESSAGE')
 
         if user:
             await self.send_json(
                 {
-                    'msg_type': 'chat.send',
-                    'chat': event['chat_id'],
+                    'msg_type': event['type'],
                     'user_id': user.id,
                     'message': event['message'],
-                    'time_stamp': event['time_stamp']
+                    'timestamp': event['timestamp']
                 },
             )

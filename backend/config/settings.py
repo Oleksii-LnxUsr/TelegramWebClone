@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     'corsheaders',
     'users.apps.UsersConfig',
     'chats.apps.ChatsConfig',
-    'subscriptions.apps.SubscriptionsConfig',
     'rest_framework',
     'rest_framework_simplejwt',
     'djoser',

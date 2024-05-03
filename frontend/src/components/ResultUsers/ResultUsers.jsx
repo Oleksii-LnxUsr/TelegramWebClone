@@ -35,6 +35,7 @@ const ResultUsers = ({ result, setResult }) => {
                                 src={user?.avatar}
                                 alt="user avatar"
                                 width={50}
+                                style={{ borderRadius: "50%" }}
                             />
                             <p>{user?.username}</p>
                         </div>

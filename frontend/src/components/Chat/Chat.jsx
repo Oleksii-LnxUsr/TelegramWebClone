@@ -2,10 +2,17 @@ import { FormControl } from "@mui/material";
 import { useEffect, useState, useContext } from "react";
 import AuthContext from "../../context/AuthContext";
 import CustomField from "../CustomField/CustomField";
+import Message from "../Message/Message";
 import { getChatInfo } from "../../api/getChatInfo";
 import { getChatMessages } from "../../api/getMessages";
-import Message from "../Message/Message";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { Dropdown } from "@mui/base/Dropdown";
+import { Menu } from "@mui/base/Menu";
+import { MenuButton } from "@mui/base/MenuButton";
+import { MenuItem } from "@mui/base/MenuItem";
+import { deleteChat } from "../../api/deleteChat";
 import "./Chat.css";
+import { useNavigate } from "react-router-dom";
 
 const Chat = ({ chat_id }) => {
     const [message, setMessage] = useState("");
@@ -13,10 +20,10 @@ const Chat = ({ chat_id }) => {
     const [isWebsocketOpen, setIsWebsocketOpen] = useState(false);
     const [websocket, setWebsocket] = useState(null);
     const [chatInfo, setChatInfo] = useState({});
-    const { authTokens } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const { authTokens, logoutUser } = useContext(AuthContext);
 
     const apiUrl = process.env.REACT_APP_API_URL;
-
     console.log(recivedMessages);
 
     useEffect(() => {
@@ -25,12 +32,15 @@ const Chat = ({ chat_id }) => {
                 authTokens: authTokens,
                 uuid: chat_id,
                 setData: setChatInfo,
+                logout: logoutUser,
+                navigate: navigate,
             });
 
             getChatMessages({
                 setData: setRecivedMessages,
                 uuid: chat_id,
                 authTokens: authTokens,
+                logout: logoutUser,
             });
 
             const ws = new WebSocket(
@@ -44,6 +54,7 @@ const Chat = ({ chat_id }) => {
 
             ws.onmessage = (event) => {
                 const message = JSON.parse(event.data);
+                console.log(message, "MSG99");
                 setRecivedMessages((prevMessages) => [
                     ...prevMessages,
                     message,
@@ -72,6 +83,14 @@ const Chat = ({ chat_id }) => {
         }
     };
 
+    const handleChatDelete = () => {
+        deleteChat({
+            uuid: chat_id,
+            authTokens: authTokens,
+            logout: logoutUser,
+        });
+    };
+
     return (
         <div className="chat-container">
             <div className="chat-header">
@@ -83,6 +102,19 @@ const Chat = ({ chat_id }) => {
                     />
                 </div>
                 <p className="chat-username">{chatInfo?.name}</p>
+                <Dropdown>
+                    <MenuButton className="chat-menu-btn">
+                        <MoreVertIcon />
+                    </MenuButton>
+                    <Menu className="chat-menu">
+                        <MenuItem onClick={() => handleChatDelete()}>
+                            Delete chat
+                        </MenuItem>
+                        <MenuItem onClick={() => logoutUser()}>
+                            Log out
+                        </MenuItem>
+                    </Menu>
+                </Dropdown>
             </div>
             {/* messages */}
 
@@ -93,7 +125,7 @@ const Chat = ({ chat_id }) => {
                             key={index}
                             message={recivedMessage?.message}
                             sender={recivedMessage?.user_id}
-                            timestamp={recivedMessage?.time_stamp}
+                            timestamp={recivedMessage?.timestamp}
                         />
                     );
                 })}

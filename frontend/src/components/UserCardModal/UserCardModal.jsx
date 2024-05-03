@@ -71,7 +71,11 @@ const UserCardModal = ({ open, handleClose, userUuid, setIsOpen }) => {
                             src={userData?.avatar}
                             alt="avatar"
                             draggable={false}
-                            style={{ width: "50%", marginTop: "15px" }}
+                            style={{
+                                width: "50%",
+                                marginTop: "15px",
+                                borderRadius: "50%",
+                            }}
                         />
                         <p>{userData?.username}</p>
                         <Button

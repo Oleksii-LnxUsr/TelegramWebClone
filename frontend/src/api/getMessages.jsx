@@ -1,4 +1,9 @@
-export const getChatMessages = async ({ authTokens, uuid, setData }) => {
+export const getChatMessages = async ({
+    authTokens,
+    uuid,
+    setData,
+    logout,
+}) => {
     const apiUrl = process.env.REACT_APP_API_URL;
     console.log(authTokens?.access);
     try {
@@ -13,6 +18,9 @@ export const getChatMessages = async ({ authTokens, uuid, setData }) => {
         if (response.ok) {
             const data = await response.json();
             setData(data);
+        }
+        if (response?.status === 401) {
+            logout();
         }
     } catch (error) {
         setData([]);
